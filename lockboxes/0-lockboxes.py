@@ -20,9 +20,10 @@ def canUnlockAll(boxes):
             index = boxes[i][y]
             if index not in unlocked:
                 unlocked.append(index)
-            for elem in boxes[index]:
-                if elem not in unlocked:
-                    unlocked.append(elem)
+            if index < len(boxes):
+                for elem in boxes[index]:
+                    if elem not in unlocked:
+                        unlocked.append(elem)
             y += 1
         i += 1
     return True
