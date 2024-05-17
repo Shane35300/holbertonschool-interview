@@ -10,20 +10,16 @@ def canUnlockAll(boxes):
     contain keys to the other boxes
     """
 
-    i = 0
-    unlocked = [0]
-    while i < len(boxes):
-        if i not in unlocked:
-            return False
-        y = 0
-        while y < len(boxes[i]):
-            index = boxes[i][y]
-            if index not in unlocked:
-                unlocked.append(index)
-            if index < len(boxes):
-                for elem in boxes[index]:
-                    if elem not in unlocked:
-                        unlocked.append(elem)
-            y += 1
-        i += 1
-    return True
+    n = len(boxes)
+    unlocked = [False] * n
+    unlocked[0] = True  # Start with the first box being unlocked
+    keys = [0]  # Start with the key to the first box
+
+    while keys:
+        current_key = keys.pop()
+        for key in boxes[current_key]:
+            if key < n and not unlocked[key]:  # Check if the key is within range and the box is not yet unlocked
+                unlocked[key] = True
+                keys.append(key)
+
+    return all(unlocked)
