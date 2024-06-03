@@ -70,6 +70,8 @@ static int is_unstable(int grid[3][3])
 static void stabilize_grid(int grid[3][3])
 {
 	int unstable;
+	int temp_grid[3][3];
+	int i, j;
 
 	do {
 		unstable = is_unstable(grid);
@@ -78,9 +80,6 @@ static void stabilize_grid(int grid[3][3])
 		{
 			printf("=\n");
 			print_grid(grid);
-			/* Create a copy of grid to store changes */
-			int temp_grid[3][3];
-			int i, j;
 
 			for (i = 0; i < 3; i++)
 			{
