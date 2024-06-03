@@ -79,7 +79,7 @@ static void stabilize_grid(int grid[3][3])
 			printf("=\n");
 			print_grid(grid);
 			/* Create a copy of grid to store changes */
-			int temp_grid[3][3] = {0};
+			int temp_grid[3][3];
 			int i, j;
 
 			for (i = 0; i < 3; i++)
