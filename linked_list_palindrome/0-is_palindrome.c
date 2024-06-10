@@ -13,14 +13,20 @@ int is_palindrome(listint_t **head)
 	listint_t *ptr2 = *head;
 	int nb_elem = 0;
 	int i = 0;
+	int j;
+	int *tableau;
 
 	while (ptr != NULL)
 	{
 		nb_elem++;
 		ptr = ptr->next;
 	}
-	int tableau[nb_elem];
-	int j = nb_elem;
+	tableau = (int *)malloc(nb_elem * sizeof(int));
+	if (tableau == NULL)
+	{
+		return (0);
+	}
+	j = nb_elem;
 
 	while (ptr2 != NULL)
 	{
