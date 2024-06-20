@@ -1,5 +1,11 @@
 #!/usr/bin/python3
-""" This module reads stdin line by line and computes metrics
+"""
+This module reads stdin line by line and computes metrics.
+
+It prints the following statistics after every 10 lines and upon keyboard
+interruption (CTRL + C):
+- Total file size
+- Number of lines by status code
 """
 import sys
 import signal
