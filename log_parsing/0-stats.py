@@ -26,15 +26,20 @@ signal.signal(signal.SIGINT, signal_handler)
 total_lines = 0
 total_file_size = 0
 dico = {}
-for line in sys.stdin:
-    line_list = line.strip().split()
-    if len(line_list) == 9:
-        total_lines += 1
-        total_file_size += int(line_list[8])
-        if line_list[7] in dico:
-            ex_value = dico[line_list[7]]
-            dico[line_list[7]] = ex_value + 1
-        else:
-            dico[line_list[7]] = 1
-        if total_lines % 10 == 0:
-            print_stats()
+try:
+    for line in sys.stdin:
+        line_list = line.strip().split()
+        if len(line_list) == 9:
+            total_lines += 1
+            total_file_size += int(line_list[8])
+            if line_list[7] in dico:
+                dico[line_list[7]] += 1
+            else:
+                dico[line_list[7]] = 1
+            if total_lines % 10 == 0:
+                print_stats()
+except Exception as e:
+    print(f"Error processing line: {e}", file=sys.stderr)
+finally:
+    # Print the statistics at the end of the line reading
+    print_stats()
