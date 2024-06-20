@@ -1,5 +1,23 @@
 #!/usr/bin/python3
 import sys
+import signal
+
+
+def signal_handler(sig, frame):
+    """Gère l'interruption clavier (CTRL + C) et imprime les statistiques."""
+    print_stats()
+    sys.exit(0)
+
+
+def print_stats():
+    print("File size: " + str(total_file_size))
+    sorted_dico_keys = sorted(dico.keys())
+    for key in sorted_dico_keys:
+        print(key + ":", str(dico[key]))
+
+
+# Enregistre la fonction de gestion pour le signal SIGINT (CTRL + C)
+signal.signal(signal.SIGINT, signal_handler)
 
 total_lines = 0
 total_file_size = 0
@@ -15,7 +33,4 @@ for line in sys.stdin:
         else:
             dico[line_list[7]] = 1
         if total_lines % 10 == 0:
-            print("File size: " + str(total_file_size))
-            sorted_dico_keys = sorted(dico.keys())
-            for key in sorted_dico_keys:
-                print(key + ":", str(dico[key]))
+            print_stats()
