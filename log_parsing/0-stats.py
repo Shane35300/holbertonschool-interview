@@ -20,7 +20,6 @@ def print_stats():
         print(key + ":", str(dico[key]))
 
 
-# Enregistre la fonction de gestion pour le signal SIGINT (CTRL + C)
 signal.signal(signal.SIGINT, signal_handler)
 
 total_lines = 0
@@ -41,5 +40,4 @@ try:
 except Exception as e:
     print(f"Error processing line: {e}", file=sys.stderr)
 finally:
-    # Print the statistics at the end of the line reading
     print_stats()
