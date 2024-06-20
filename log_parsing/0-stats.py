@@ -7,43 +7,42 @@ interruption (CTRL + C):
 - Total file size
 - Number of lines by status code
 """
+
 import sys
-import signal
+import fileinput
 
+status_codes = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0, "404": 0,
+                "405": 0, "500": 0}
+file_size = 0
+nbline = 1
 
-def signal_handler(sig, frame):
-    """Gère l'interruption clavier (CTRL + C) et imprime les statistiques."""
-    print_stats()
-    sys.exit(0)
-
-
-def print_stats():
-    """ This method print the statistic results
-    """
-    print("File size: " + str(total_file_size))
-    sorted_dico_keys = sorted(dico.keys())
-    for key in sorted_dico_keys:
-        print(key + ":", str(dico[key]))
-
-
-signal.signal(signal.SIGINT, signal_handler)
-
-total_lines = 0
-total_file_size = 0
-dico = {}
 try:
-    for line in sys.stdin:
-        line_list = line.strip().split()
-        if len(line_list) == 9:
-            total_lines += 1
-            total_file_size += int(line_list[8])
-            if line_list[7] in dico:
-                dico[line_list[7]] += 1
-            else:
-                dico[line_list[7]] = 1
-            if total_lines % 10 == 0:
-                print_stats()
-except Exception as e:
-    print(f"Error processing line: {e}", file=sys.stderr)
-finally:
-    print_stats()
+    for line in fileinput.input():
+        check_format = line.split()
+        check_nb = len(check_format)
+        if check_nb == 7:
+            file_size += 1000
+            status_code = line.split('"')[2].split()[0]
+            for key, value in status_codes.items():
+                if status_code == key:
+                    status_codes[key] = value + 1
+        elif check_nb == 9:
+            status_code = line.split('"')[2].split()[0]
+            file_size += int(line.split('"')[2].split()[1])
+            for key, value in status_codes.items():
+                if status_code == key:
+                    status_codes[key] = value + 1
+            if nbline % 10 == 0 and nbline != 0:
+                print("File size: {}".format(file_size))
+                for key in sorted(status_codes.keys()):
+                    if status_codes[key] > 0:
+                        print("{}: {}".format(key, status_codes[key]))
+            nbline = nbline + 1
+        else:
+            pass
+except KeyboardInterrupt:
+    pass
+print("File size: {}".format(file_size))
+for key in sorted(status_codes.keys()):
+    if status_codes[key] > 0:
+        print("{}: {}".format(key, status_codes[key]))
