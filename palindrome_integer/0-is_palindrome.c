@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "palindrome.h"
 
 /**
@@ -11,20 +12,16 @@
 int is_palindrome(unsigned long n)
 {
 	char array[21];
-	int x = 0, y = 0;
+	int x = 0, y;
 
 	sprintf(array, "%lu", n);
-	while (array[x] != '\0')
+	x = strlen(array);
+	for (y = 0; y < x / 2; y++)
 	{
-		x++;
-	}
-	x -= 1;
-	while (x > y)
-	{
-		if (array[x] - 48 != array[y] - 48)
-			return (0);
-		x--;
-		y++;
+		if (array[y] != array[x - 1 - y])
+		{
+			return 0;
+		}
 	}
 	return (1);
 }
