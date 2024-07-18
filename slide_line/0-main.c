@@ -3,14 +3,14 @@
 #include <stddef.h>
 #include "slide_line.h"
 
-#define LINE_SIZE   32
+#define LINE_SIZE 32
 
 /**
- * print_array - Prints out an array of integer, followed by a new line
- *
- * @array: Pointer to the array of integer to be printed
- * @size: Number of elements in @array
- */
+* print_array - Prints out an array of integer, followed by a new line
+*
+* @array: Pointer to the array of integer to be printed
+* @size: Number of elements in @array
+*/
 static void print_array(int const *array, size_t size)
 {
     size_t i;
@@ -22,13 +22,13 @@ static void print_array(int const *array, size_t size)
 }
 
 /**
- * main - Entry point
- *
- * @ac: Arguments counter
- * @av: Arguments vector
- *
- * Return: EXIT_SUCCESS or EXIT_FAILURE
- */
+* main - Entry point
+*
+* @ac: Arguments counter
+* @av: Arguments vector
+*
+* Return: EXIT_SUCCESS or EXIT_FAILURE
+*/
 int main(int ac, char **av)
 {
     int line[LINE_SIZE];
@@ -41,17 +41,14 @@ int main(int ac, char **av)
         return (EXIT_FAILURE);
     }
 
-    /* Command line arguments to array of int */
     size = ac - 2;
     if (size > LINE_SIZE)
         size = LINE_SIZE;
     for (i = 0; i < size; i++)
         line[i] = atoi(av[i + 2]);
 
-    /* Print the array */
     print_array(line, size);
 
-    /* Parse direction */
     switch (*(av[1]))
     {
     case 'L':
@@ -67,14 +64,12 @@ int main(int ac, char **av)
         return (EXIT_FAILURE);
     }
 
-    /* Slide and merge */
     if (!slide_line(line, size, direction))
     {
         fprintf(stderr, "Failed to slide and merge line\n");
         return (EXIT_FAILURE);
     }
 
-    /* Print the array */
     print_array(line, size);
 
     return (EXIT_SUCCESS);

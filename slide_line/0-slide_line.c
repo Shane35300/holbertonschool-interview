@@ -1,12 +1,12 @@
 #include "slide_line.h"
 
 /**
- * slide_line - Slides and merges an array of integers to the left or right.
- * @line: Pointer to an array of integers.
- * @size: Number of elements in @line.
- * @direction: SLIDE_LEFT or SLIDE_RIGHT.
- * Return: 1 on success, 0 on failure.
- */
+* slide_line - Slides and merges an array of integers to the left or right.
+* @line: Pointer to an array of integers.
+* @size: Number of elements in @line.
+* @direction: SLIDE_LEFT or SLIDE_RIGHT.
+* Return: 1 on success, 0 on failure.
+*/
 int slide_line(int *line, size_t size, int direction)
 {
 	if (direction != SLIDE_LEFT && direction != SLIDE_RIGHT)
@@ -82,6 +82,5 @@ int slide_line(int *line, size_t size, int direction)
 			}
 		}
 	}
-
 	return 1;
 }
