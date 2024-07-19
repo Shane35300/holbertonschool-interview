@@ -27,36 +27,40 @@ int slide_line(int *line, size_t size, int direction)
  */
 void slide_left(int *line, size_t size)
 {
-	int i, current = 0, merged = 0;
+	int i, j;
 
-	for (i = 0; i < (int)size; i++)
+	for (i = 0, j = 0; i < (int)size; i++)
 	{
 		if (line[i] != 0)
 		{
-			if (current != i)
+			if (i != j)
 			{
-				if (line[current] == line[i] && merged == 0)
-				{
-					line[current++] *= 2;
-					line[i] = 0;
-					merged = 1;
-				}
-				else if (line[current] == 0)
-				{
-					line[current] = line[i];
-					line[i] = 0;
-				}
-				else
-				{
-					if (line[current + 1] == 0)
-						current++;
-					line[++current] = line[i];
-					if (i != current)
-						line[i] = 0;
-				}
+				line[j] = line[i];
+				line[i] = 0;
 			}
-			else
-				merged = 0;
+			j++;
+		}
+	}
+
+	for (i = 0; i < (int)size - 1; i++)
+	{
+		if (line[i] == line[i + 1] && line[i] != 0)
+		{
+			line[i] *= 2;
+			line[i + 1] = 0;
+		}
+	}
+
+	for (i = 0, j = 0; i < (int)size; i++)
+	{
+		if (line[i] != 0)
+		{
+			if (i != j)
+			{
+				line[j] = line[i];
+				line[i] = 0;
+			}
+			j++;
 		}
 	}
 }
@@ -68,36 +72,40 @@ void slide_left(int *line, size_t size)
  */
 void slide_right(int *line, size_t size)
 {
-	int i, current = size - 1, merged = 0;
+	int i, j;
 
-	for (i = size - 1; i >= 0; i--)
+	for (i = (int)size - 1, j = (int)size - 1; i >= 0; i--)
 	{
 		if (line[i] != 0)
 		{
-			if (current != i)
+			if (i != j)
 			{
-				if (line[current] == line[i] && merged == 0)
-				{
-					line[current--] *= 2;
-					line[i] = 0;
-					merged = 1;
-				}
-				else if (line[current] == 0)
-				{
-					line[current] = line[i];
-					line[i] = 0;
-				}
-				else
-				{
-					if (line[current - 1] == 0)
-						current--;
-					line[--current] = line[i];
-					if (i != current)
-						line[i] = 0;
-				}
+				line[j] = line[i];
+				line[i] = 0;
 			}
-			else
-				merged = 0;
+			j--;
+		}
+	}
+
+	for (i = (int)size - 1; i > 0; i--)
+	{
+		if (line[i] == line[i - 1] && line[i] != 0)
+		{
+			line[i] *= 2;
+			line[i - 1] = 0;
+		}
+	}
+
+	for (i = (int)size - 1, j = (int)size - 1; i >= 0; i--)
+	{
+		if (line[i] != 0)
+		{
+			if (i != j)
+			{
+				line[j] = line[i];
+				line[i] = 0;
+			}
+			j--;
 		}
 	}
 }
