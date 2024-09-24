@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"slide_line.h": "c"
+		"slide_line.h": "c",
+		"binary_trees.h": "c"
 	}
 }
