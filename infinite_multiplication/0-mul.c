@@ -132,6 +132,9 @@ char *multiply_numbers(char *num1, char *num2)
 	if (result == NULL)
 		return (NULL);
 
+	for (i = 0; i < len_res; i++)
+		result[i] = '0';
+
 	for (i = len1 - 1; i >= 0; i--)
 	{
 		carry = 0;
@@ -139,6 +142,7 @@ char *multiply_numbers(char *num1, char *num2)
 		{
 			prod = (num1[i] - '0') * (num2[j] - '0') +
 				   (result[i + j + 1] - '0') + carry;
+
 			carry = prod / 10;
 			result[i + j + 1] = (prod % 10) + '0';
 		}
