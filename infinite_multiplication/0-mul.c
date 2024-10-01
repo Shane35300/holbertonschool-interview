@@ -14,16 +14,12 @@ int main(int argc, char *argv[])
 
 	char *num1 = argv[1];
 	char *num2 = argv[2];
-	int len1 = get_length(num1);
-	int len2 = get_length(num2);
-	int len_res = len1 + len2;
-
 	char *result = multiply_numbers(num1, num2);
 
 	if (!result)
 		_print_error();
 
-	print_result(result, len_res);
+	print_result(result, get_length(result));
 
 	free(result);
 	return (0);
