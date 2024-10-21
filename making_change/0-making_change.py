@@ -4,22 +4,17 @@
 
 def makeChange(coins, total):
     """
-    Evaluating the right number of coins nessesary
+    Function to find the fewest number of coins needed to meet the total
     """
+    if total <= 0:
+        return 0
 
-    liste = coins
-    somme = 0
-    numberOfCoins = 0
-    liste.sort(reverse=True)
-    for c in liste:
-        while (somme + c) < total:
-            somme += c
-            numberOfCoins += 1
-        if (somme + c) > total:
-            continue
-        elif (somme + c) == total:
-            somme += c
-            numberOfCoins += 1
-            return numberOfCoins
+    dp = [float('inf')] * (total + 1)
+    dp[0] = 0
 
-    return (-1)
+    for i in range(1, total + 1):
+        for coin in coins:
+            if i - coin >= 0:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+
+    return dp[total] if dp[total] != float('inf') else -1
