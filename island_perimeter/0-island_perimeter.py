@@ -5,23 +5,30 @@ This module's goal is to calculate the right permieter"""
 
 def island_perimeter(grid):
     """
-    This function calculate a perimeter by making loop into the gris
+    This function calculates the perimeter of the island described in the grid.
     """
+    total_perimeter = 0
 
-    total = 0
-    i = 0
-    for i in range(len(grid)):
-        j = 0
-        for j in range(len(grid[i])):
+    rows = len(grid)
+    cols = len(grid[0]) if rows > 0 else 0
+
+    for i in range(rows):
+        for j in range(cols):
             if grid[i][j] == 1:
-                per = 0
-                if grid[i - 1][j] != 1:
-                    per += 1
-                if grid[i + 1][j] != 1:
-                    per += 1
-                if grid[i][j - 1] != 1:
-                    per += 1
-                if grid[i][j + 1] != 1:
-                    per += 1
-                total += per
-    return (total)
+                per = 4
+
+                if i > 0 and grid[i - 1][j] == 1:
+                    per -= 1
+
+                if i < rows - 1 and grid[i + 1][j] == 1:
+                    per -= 1
+
+                if j > 0 and grid[i][j - 1] == 1:
+                    per -= 1
+
+                if j < cols - 1 and grid[i][j + 1] == 1:
+                    per -= 1
+
+                total_perimeter += per
+
+    return total_perimeter
