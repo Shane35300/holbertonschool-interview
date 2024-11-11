@@ -5,8 +5,9 @@ This module's goal is to calculate the right permieter"""
 
 def island_perimeter(grid):
     """
-    This function calculate a perimeter
+    This function calculate a perimeter by making loop into the gris
     """
+
     total = 0
     i = 0
     for i in range(len(grid)):
