@@ -37,7 +37,6 @@ return (is_bst(tree->left, min, tree->n) &&
 /**
  * is_avl_helper - Helper function to verify if a tree is an AVL tree
  * @tree: Pointer to the root node
- * @height_diff: Pointer to store height difference
  *
  * Return: 1 if tree is a valid AVL tree, otherwise 0
  */
