@@ -9,11 +9,11 @@
  */
 int height(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
-    int left_height = height(tree->left);
-    int right_height = height(tree->right);
-    return (1 + (left_height > right_height ? left_height : right_height));
+if (!tree)
+	return (0);
+int left_height = height(tree->left);
+int right_height = height(tree->right);
+return (1 + (left_height > right_height ? left_height : right_height));
 }
 
 /**
@@ -26,12 +26,12 @@ int height(const binary_tree_t *tree)
  */
 int is_bst(const binary_tree_t *tree, int min, int max)
 {
-    if (!tree)
-        return (1);
-    if (tree->n <= min || tree->n >= max)
-        return (0);
-    return (is_bst(tree->left, min, tree->n) &&
-            is_bst(tree->right, tree->n, max));
+if (!tree)
+	return (1);
+if (tree->n <= min || tree->n >= max)
+	return (0);
+return (is_bst(tree->left, min, tree->n) &&
+		is_bst(tree->right, tree->n, max));
 }
 
 /**
@@ -43,18 +43,18 @@ int is_bst(const binary_tree_t *tree, int min, int max)
  */
 int is_avl_helper(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (1);
+if (!tree)
+	return (1);
 
-    int left_height = height(tree->left);
-    int right_height = height(tree->right);
+int left_height = height(tree->left);
+int right_height = height(tree->right);
 
-    /* Check height difference */
-    if (abs(left_height - right_height) > 1)
-        return (0);
+/* Check height difference */
+if (abs(left_height - right_height) > 1)
+	return (0);
 
-    /* Check if both left and right subtrees are AVL */
-    return (is_avl_helper(tree->left) && is_avl_helper(tree->right));
+/* Check if both left and right subtrees are AVL */
+return (is_avl_helper(tree->left) && is_avl_helper(tree->right));
 }
 
 /**
@@ -65,13 +65,13 @@ int is_avl_helper(const binary_tree_t *tree)
  */
 int binary_tree_is_avl(const binary_tree_t *tree)
 {
-    if (!tree)
-        return (0);
+if (!tree)
+	return (0);
 
-    /* Check if tree is a BST */
-    if (!is_bst(tree, INT_MIN, INT_MAX))
-        return (0);
+/* Check if tree is a BST */
+if (!is_bst(tree, INT_MIN, INT_MAX))
+	return (0);
 
-    /* Check if tree is balanced (AVL property) */
-    return (is_avl_helper(tree));
+/* Check if tree is balanced (AVL property) */
+return (is_avl_helper(tree));
 }
